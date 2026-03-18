@@ -1,8 +1,10 @@
 import React from 'react'
-
+import home from '@/modules/home/home'
 const page = () => {
   return (
-    <div>page</div>
+    <div>
+      <home></home>
+    </div>
   )
 }
 
