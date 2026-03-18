@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Logo from './Logo'
 import NavItems from './NavItems'
-
+import Toolbar from './Toolbar'
 
 const Header = () => {
   return (
