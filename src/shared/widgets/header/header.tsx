@@ -10,11 +10,13 @@ const Header = () => {
         <Link href={"/"}>
           <Logo></Logo>
         </Link>
-        <div>
-          <NavItems></NavItems>
-        </div>
+        
 
       </div>
+      <div>
+          <NavItems></NavItems>
+        </div>
+        
     </header>
   )
 }
