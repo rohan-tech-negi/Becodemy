@@ -1,6 +1,6 @@
 "use client";
 
-import {NextUIProvider} from "@nextui-org/react";
+import {HeroUIProvider} from "@heroui/react";
 
 import { usePathname } from "next/navigation";
 
@@ -10,10 +10,19 @@ interface ProviderProps{
 
 export default function Providers({children}: ProviderProps){
     const pathname = usePathname();
-    const isAuthPage = pathname === "/login" || pathname === "/register";
+    // const isAuthPage = pathname === "/login" || pathname === "/register";
     return (
-        <NextUIProvider>
-            {children}
-        </NextUIProvider>
+        <HeroUIProvider>
+            {pathname !== "/dashboard/new-email" && pathname !== "/" && pathname !== "sign-up" && pathname !== "subscribe" && pathname !== "/sign-in" ? (
+                <div className="w-full flex flex-col min-h-screen">
+                    <div className="w-[290px] h-screen overflow-y-scroll">
+                        </div> 
+                </div>
+            ) : (
+                <>
+                    {children}
+                </>
+            )}
+        </HeroUIProvider>
     )
 }
