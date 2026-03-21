@@ -5,6 +5,7 @@ import Branding from "./features/Branding"
 import Benefits from './features/Benefits'
 import FeatureHighLight from './features/FeatureHighLight'
 import Pricing from './features/Pricing'
+import Footer from "@/shared/widgets/footer/Footer"
 
 const home = () => {
   return (
