@@ -1,7 +1,7 @@
 import Header from '@/shared/widgets/header/header'
 import React from 'react'
 import Banner from "./features/Banner"
-import Brasn
+import Branding from "./features/Branding" 
 
 const home = () => {
   return (
