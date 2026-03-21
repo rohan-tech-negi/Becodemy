@@ -4,6 +4,7 @@ import Banner from "./features/Banner"
 import Branding from "./features/Branding" 
 import Benefits from './features/Benefits'
 import FeatureHighLight from './features/FeatureHighLight'
+import Pricing from './features/Pricing'
 
 const home = () => {
   return (
@@ -13,6 +14,7 @@ const home = () => {
         <Branding></Branding>
         <Benefits></Benefits>
         <FeatureHighLight></FeatureHighLight>
+        <Pricing></Pricing>
     </div>
   )
 }
