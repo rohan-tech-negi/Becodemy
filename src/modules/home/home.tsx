@@ -15,6 +15,7 @@ const home = () => {
         <Benefits></Benefits>
         <FeatureHighLight></FeatureHighLight>
         <Pricing></Pricing>
+        <Footer></Footer>
     </div>
   )
 }
