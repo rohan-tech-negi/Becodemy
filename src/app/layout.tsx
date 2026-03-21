@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "../shared/styles/globals.css";
 import Providers from "@/shared/utils/Providers";
 import localFont from "next/font/local";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const clashDisplay = localFont({
   src: "../assets/ClashDisplay-Variable.ttf",
@@ -30,7 +31,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <ClerkProvider>
+<html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${clashDisplay.variable} antialiased`}
       >
@@ -39,5 +41,8 @@ export default function RootLayout({
         </Providers>
       </body>
     </html>
+
+    </ClerkProvider>
+    
   );
 }

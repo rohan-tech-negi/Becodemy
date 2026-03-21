@@ -1,6 +1,6 @@
 import React from 'react'
 import Marquee from "react-fast-marquee"
-import { partners } from '../../../app/config/constants.ts'
+import { partners } from '@/app/config/constants'
 import Image from 'next/image'
 const Branding = () => {
   return (

@@ -1,10 +1,10 @@
 import Header from '@/shared/widgets/header/header'
 import React from 'react'
-import Banner from "./features/Banner"
-import Branding from "./features/Branding" 
-import Benefits from './features/Benefits'
-import FeatureHighLight from './features/FeatureHighLight'
-import Pricing from './features/Pricing'
+import Banner from "./elements/Banner"
+import Branding from "./elements/Branding" 
+import Benefits from './elements/Benefits'
+import FeatureHighLight from './elements/FeatureHighLight'
+import Pricing from './elements/Pricing'
 import Footer from "@/shared/widgets/footer/Footer"
 
 const home = () => {
