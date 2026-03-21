@@ -42,7 +42,7 @@ const Pricing = () => {
           </div>
 
             </div>
-            <PricingCard></PricingCard>
+            <PricingCard active={active} />
         </div>
     </div>
   )
