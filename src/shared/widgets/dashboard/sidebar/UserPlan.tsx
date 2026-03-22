@@ -1,4 +1,5 @@
 import { ICONS } from '@/shared/utils/Icons'
+import { Slider } from '@heroui/react'
 import React from 'react'
 
 const UserPlan = () => {
@@ -17,12 +18,12 @@ const UserPlan = () => {
         </div>
       </div>
       <h5 className="text-[#831743]">Total subscribers</h5>
-      {/* <Slider
+      <Slider
         aria-label="Player progress"
         hideThumb={true}
         defaultValue={1}
         className="max-w-md"
-      /> */}
+      />
       <h6 className="text-[#831743]">
         {/* {loading ? "..." : data?.length} of{" "} */}
         {/* {membershipData?.plan === "LAUNCH" */}

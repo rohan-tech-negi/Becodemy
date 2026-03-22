@@ -19,6 +19,7 @@ const DashboardSidebar = () => {
         <div>
             <DashboardItems></DashboardItems>
             <UserPlan></UserPlan>
+            <DashboardItems bottomContent={true}></DashboardItems>
         </div>
     </div>
   )
