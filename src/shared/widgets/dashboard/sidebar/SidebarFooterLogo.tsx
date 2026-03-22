@@ -1,5 +1,5 @@
 
-const SidebarFotterLogo = () => {
+const SidebarFooterLogo = () => {
   return (
     <div className="flex w-[90%] items-center justify-center relative">
       <svg
@@ -51,4 +51,4 @@ const SidebarFotterLogo = () => {
   );
 };
 
-export default SidebarFotterLogo;
+export default SidebarFooterLogo;
