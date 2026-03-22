@@ -7,11 +7,26 @@ import SubscriberChart from "@/shared/components/charts/SubscriberChart"
 import { Button } from "@heroui/button"
 import { useState } from "react"
 import { ICONS } from "@/shared/utils/Icons"
-import Link from "next/link"  
+import Link from "next/link"
+import toast from "react-hot-toast";  
 
 const Main = () => {
   const [copied, setCopied] = useState(false);
     const {user} = useUser()
+
+    const handleCopyClick = () => {
+    const smallText = document.querySelector(".copy-text") as HTMLElement;
+    if (smallText) {
+      const textToCopy = smallText.innerText;
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        setCopied(true);
+        toast.success("Copied");
+        setTimeout(() => {
+          setCopied(false);
+        }, 2000);
+      });
+    }
+  };
   return (
     <div className="p-5 w-full h-screen bg-[#f9fafb] ">
         <h1 className="text-2xl text-surface-900 font-medium">
@@ -50,7 +65,7 @@ const Main = () => {
 
                 <div
                   className="w-full px-2 my-1 h-[38px] bg-transparent border rounded-lg relative flex items-center cursor-pointer"
-                  // onClick={handleCopyClick}
+                  onClick={handleCopyClick}
                 >
                   <small
                     className={`w-[70%] text-sm overflow-hidden overflow-ellipsis whitespace-nowrap copy-text ${
