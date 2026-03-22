@@ -1,6 +1,7 @@
 import { ICONS } from '@/shared/utils/Icons'
 import { useUser } from '@clerk/nextjs'
 import React from 'react'
+import DashboardItems from './DashboardItems'
 
 const DashboardSidebar = () => {
     const {user} = useUser()
