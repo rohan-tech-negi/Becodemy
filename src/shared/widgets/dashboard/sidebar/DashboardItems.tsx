@@ -1,4 +1,4 @@
-import { sideBarItems } from '@/app/config/constants'
+import { sideBarBottomItems, sideBarItems } from '@/app/config/constants'
 import useRouteChange from '@/shared/hooks/useRouteChange'
 import { useClerk } from '@clerk/nextjs'
 import Link from 'next/link'
@@ -28,7 +28,36 @@ const DashboardItems = ({bottomContent}:{bottomContent?:boolean}) => {
             ))}
           </>
         ) : (
-          <></>
+          <>
+            {sideBarBottomItems.map(
+            (item: DashboardSideBarTypes, index: number) => (
+              <Link
+                key={index}
+                className="p-2 py-5 flex items-center"
+                href={
+                  item.url === "/"
+                    ? `/subscribe?username=${user?.username}`
+                    : item.url
+                }
+              >
+                <span
+                  className={`text-3xl mr-2 ${
+                    item.url === activeRoute && "text-[#463bbd]"
+                  }`}
+                >
+                  {item.icon}
+                </span>
+                <span
+                  className={`text-xl mr-2 ${
+                    item.url === activeRoute && "text-[#463bbd]"
+                  }`}
+                >
+                  {item.title}
+                </span>
+              </Link>
+            )
+          )}
+          </>
         )
       }
     </>
