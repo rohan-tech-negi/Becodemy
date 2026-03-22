@@ -22,11 +22,13 @@ export default function Providers({children}: ProviderProps){
     return (
         <HeroUIProvider>
             {pathname !== "/dashboard/new-email" && pathname !== "/" && pathname !== "/sign-up" && pathname !== "subscribe" && pathname !== "/sign-in" ? (
-                <div className="w-full flex flex-col min-h-screen">
-                    <div className="w-[290px] h-screen overflow-y-scroll">
+                <div className="w-full flex h-screen overflow-hidden">
+                    <div className="w-[290px] h-full overflow-y-scroll shrink-0">
                         <DashboardSidebar></DashboardSidebar>
-                        </div> 
+                    </div> 
+                    <div className="flex-1 h-full overflow-y-auto">
                         {children}
+                    </div>
                 </div>
             ) : (
                 <>
