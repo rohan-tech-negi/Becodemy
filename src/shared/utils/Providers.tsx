@@ -5,6 +5,7 @@ import {HeroUIProvider} from "@heroui/react";
 
 import { usePathname } from "next/navigation";
 import DashboardSidebar from "../widgets/dashboard/sidebar/DashboardSidebar";
+import { Toaster } from "react-hot-toast";
 
 interface ProviderProps{
     children: React.ReactNode;
@@ -35,6 +36,8 @@ export default function Providers({children}: ProviderProps){
                     {children}
                 </>
             )}
+
+            <Toaster position="top-center" reverseOrder={false} />
         </HeroUIProvider>
     )
 }
