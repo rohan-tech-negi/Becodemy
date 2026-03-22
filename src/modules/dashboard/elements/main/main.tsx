@@ -13,6 +13,12 @@ const Main = () => {
         <p className="opacity-[.7] text-sm">
             Here's what's happening with your newsletter today
         </p>
+        <div className="w-full flex">
+        <div className="w-[65%]  min-h-[88vh] pr-5">
+          {/* <ReportFilter></ReportFilter> */}
+          <DashboardOverViewCard></DashboardOverViewCard>
+        </div>
+        </div>
     </div>
   )
 }
