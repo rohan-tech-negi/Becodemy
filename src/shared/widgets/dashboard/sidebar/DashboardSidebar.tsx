@@ -2,6 +2,7 @@ import { ICONS } from '@/shared/utils/Icons'
 import { useUser } from '@clerk/nextjs'
 import React from 'react'
 import DashboardItems from './DashboardItems'
+import UserPlan from './UserPlan'
 
 const DashboardSidebar = () => {
     const {user} = useUser()
@@ -17,6 +18,7 @@ const DashboardSidebar = () => {
         </div>
         <div>
             <DashboardItems></DashboardItems>
+            <UserPlan></UserPlan>
         </div>
     </div>
   )
