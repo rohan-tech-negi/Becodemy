@@ -4,6 +4,7 @@
 import { ICONS } from "@/shared/utils/Icons";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import Emaileditor from "@/components/Emaileditor";
 
 const page = () => {
    const searchParams = useSearchParams();
