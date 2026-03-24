@@ -5,7 +5,8 @@ import { ICONS } from "@/shared/utils/Icons";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 // import Emaileditor from "@/components/Emaileditor";
-import Emaileditor from "@/components/Emaileditor";
+// import Emaileditor from "@/components/Emaileditor";
+import Emaileditor from "@/shared/components/editor/EmailEditor";
 
 const page = () => {
    const searchParams = useSearchParams();
