@@ -20,7 +20,9 @@ export const GetEmailDetails = async ({
       title,
       newsLetterOwnerId,
     });
-    return email;
+    if (email) {
+      return JSON.parse(JSON.stringify(email));
+    }
   } catch (error) {
     console.log(error);
   }

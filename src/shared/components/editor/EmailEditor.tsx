@@ -8,8 +8,9 @@ import { DefaultJsonData } from "@/assets/mails/Default"
 import { Button } from "@heroui/button"
 import { saveEmail } from "@/actions/save.email"
 import toast from "react-hot-toast"
+import { GetEmailDetails } from "@/actions/get.email-details"
 const Emaileditor = ({subjectTitle}:{subjectTitle:string}) => {
-   const [loading, setLoading] = useState(false);
+   const [loading, setLoading] = useState(true);
   const [jsonData, setJsonData] = useState<any | null>(DefaultJsonData);
   const { user } = useClerk();
   const emailEditorRef = useRef<EditorRef>(null);
@@ -24,6 +25,11 @@ const Emaileditor = ({subjectTitle}:{subjectTitle:string}) => {
       
     });
   };
+
+    useEffect(() => {
+    getEmailDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
 
   const onReady: EmailEditorProps["onReady"] = () => {
@@ -44,6 +50,18 @@ const Emaileditor = ({subjectTitle}:{subjectTitle:string}) => {
         toast.success(res.message);
         history.push("/dashboard/write");
       });
+    });
+  };
+
+    const getEmailDetails = async () => {
+    await GetEmailDetails({
+      title: subjectTitle,
+      newsLetterOwnerId: user?.id!,
+    }).then((res: any) => {
+      if (res) {
+        setJsonData(JSON.parse(res?.content));
+      }
+      setLoading(false);
     });
   };
 
