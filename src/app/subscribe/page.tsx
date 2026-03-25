@@ -11,7 +11,13 @@ const [value, setValue] = useState("");
   const searchParams = useSearchParams();
   const username: string = searchParams.get("username")!;
     console.log(username)
+
+const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+   e.preventDefault();
+    setLoading(true);
     
+  };
+
   return (
     <div className="w-full flex flex-col items-center justify-center h-screen">
       <div>
