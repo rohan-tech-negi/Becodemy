@@ -5,8 +5,27 @@ import {driver, createAstraUri} from "stargate-mongoose"
 export const connectDb = async ()=>{
     try{
         const uri = createAstraUri(
-            process.env.ASTRA_DB_API_ENDPOINT!
+            process.env.ASTRA_DB_API_ENDPOINT!,
+            process.env.ASTRA_DB_APPLICATION_TOKEN!
         )
+
+        if(mongoose.connection.readyState !== 0){
+            await mongoose.disconnect()
+        }
+
+        mongoose.set("autoCreate", true);
+        mongoose.setDriver(driver)
+         await mongoose
+      .connect(uri, {
+        isAstra: true,
+      })
+      .then((res) => {
+        console.log("connected");
+      })
+      .catch((r) => {
+        console.log(r);
+      });
+        console.log("Connected to MongoDB")
     }catch(error){
         console.log(error)
     }
