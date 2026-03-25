@@ -29,6 +29,10 @@ const Emaileditor = ({subjectTitle}:{subjectTitle:string}) => {
     unlayer.loadDesign(jsonData);
   };
 
+  const saveDraft= ()=>{
+
+  }
+
 
 
   return (
@@ -43,7 +47,7 @@ const Emaileditor = ({subjectTitle}:{subjectTitle:string}) => {
           <div className="absolute bottom-0 flex items-center justify-end gap-4 right-0 w-full border-t p-3">
             <Button
               className="bg-transparent cursor-pointer flex items-center gap-1 text-black border border-[#00000048] text-lg rounded-lg"
-              
+              onClick={saveDraft}
             >
               <span className="opacity-[.7]">Save Draft</span>
             </Button>
