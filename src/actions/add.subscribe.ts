@@ -1,6 +1,9 @@
 'use server'
 
+import Subscriber from "@/models/subscriber.model";
 import { connectDb } from "@/shared/libs/db"
+import { validateEmail } from "@/shared/utils/ZeroBounceApi";
+import { clerkClient } from "@clerk/nextjs/server";
 
 export const subscribe = async ({
   email,
@@ -12,11 +15,13 @@ export const subscribe = async ({
   try {
     await connectDb();
 
-    // first we need to fetch all users
-    const allUsers = await clerkClient.users.getUserList();
+    // fetch our newsletter owner
+    const client = await clerkClient();
+    const usersResponse = await client.users.getUserList({
+      username: [username],
+    });
 
-    // now we need to find our newsletter owner
-    const newsletterOwner = allUsers.find((i) => i.username === username);
+    const newsletterOwner = usersResponse.data[0];
 
     if (!newsletterOwner) {
       throw Error("Username is not vaild!");
@@ -45,7 +50,7 @@ export const subscribe = async ({
       source: "By Becodemy website",
       status: "Subscribed",
     });
-    return subscriber;
+    return JSON.parse(JSON.stringify(subscriber));
   } catch (error) {
     console.error(error);
     return { error: "An error occurred while subscribing." };

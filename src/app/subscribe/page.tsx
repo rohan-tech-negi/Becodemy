@@ -1,9 +1,11 @@
 'use client'
 
-import { useClerk } from "@clerk/nextjs"
+import { subscribe } from "@/actions/add.subscribe"
+
 import { useSearchParams } from "next/navigation"
 import { FormEvent, useState } from "react"
 import toast from "react-hot-toast"
+
 const page = () => {
 const [value, setValue] = useState("");
   const [loading, setLoading] = useState(false);
@@ -15,7 +17,18 @@ const [value, setValue] = useState("");
 const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
    e.preventDefault();
     setLoading(true);
-    
+    await subscribe({email:value, username}).then((res)=>{
+        setLoading(false);
+        if(res.error){
+            toast.error(res.error)
+        }else{
+            toast.success("your successfully subscribed")
+        }
+    }).catch((error)=>{
+        console.log(error)
+        setLoading(false);
+    })
+    setValue("");
   };
 
   return (
