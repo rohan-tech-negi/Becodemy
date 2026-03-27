@@ -1,5 +1,6 @@
 // import React from 'react'
 'use client'
+import { subscribersAnalytics } from "@/actions/subcribers.analytics";
 import { useEffect, useState } from "react";
 import {
   LineChart,
@@ -18,36 +19,60 @@ interface subscribersAnalyticsData {
 const SubscriberChart = () => {
 
   const [subscribersData, setSubscribersData] = useState<any>([])
-    const data = [
-    {
-      month: "Jan 2024",
-      count: 2400,
-    },
-    {
-      month: "Feb 2024",
-      count: 1398,
-    },
-    {
-      month: "March 2024",
-      count: 9800,
-    },
-    {
-      month: "April 2024",
-      count: 3908,
-    },
-    {
-      month: "May 2024",
-      count: 4800,
-    },
-    {
-      month: "Jun 2024",
-      count: 3800,
-    },
-    {
-      month: "July 2024",
-      count: 4300,
-    },
-  ];
+  const [loading , setLoading] = useState(true)
+
+  useEffect(() => {
+    SubscribersAnalytics();
+  }, []);
+
+
+  const SubscribersAnalytics = async () => {
+      await subscribersAnalytics().then((res:any)=>{
+        setSubscribersData(res);
+        setLoading(false);
+      });
+      
+    };
+
+    const data: subscribersAnalyticsData[] = [];
+    subscribersData?.last7Months?.forEach((item: subscribersAnalyticsData) => {
+      data.push({
+        month: item.month,
+        count: item.count,
+      });
+    });
+    
+
+  //   const data = [
+  //   {
+  //     month: "Jan 2024",
+  //     count: 2400,
+  //   },
+  //   {
+  //     month: "Feb 2024",
+  //     count: 1398,
+  //   },
+  //   {
+  //     month: "March 2024",
+  //     count: 9800,
+  //   },
+  //   {
+  //     month: "April 2024",
+  //     count: 3908,
+  //   },
+  //   {
+  //     month: "May 2024",
+  //     count: 4800,
+  //   },
+  //   {
+  //     month: "Jun 2024",
+  //     count: 3800,
+  //   },
+  //   {
+  //     month: "July 2024",
+  //     count: 4300,
+  //   },
+  // ];
   return (
     <div className="my-5 p-5 border rounded bg-white w-full md:h-[55vh] xl:h-[60vh]">
       <div className="w-full flex">
@@ -61,7 +86,13 @@ const SubscriberChart = () => {
         </div>
       </div>
       
-        <ResponsiveContainer width="100%" height={"85%"} className={"mt-5"}>
+        {
+          loading ? (
+            <div className="h-[85%] flex items-center justify-center w-full">
+              <h5>loading....</h5>
+            </div>
+          ) : (
+            <ResponsiveContainer width="100%" height={"85%"} className={"mt-5"}>
           <LineChart
             width={500}
             height={200}
@@ -86,6 +117,8 @@ const SubscriberChart = () => {
             />
           </LineChart>
         </ResponsiveContainer>
+          )
+        }
      
     </div>
   )
