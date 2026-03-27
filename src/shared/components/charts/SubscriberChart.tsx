@@ -1,7 +1,10 @@
 // import React from 'react'
 'use client'
-import { subscribersAnalytics } from "@/actions/subcribers.analytics";
-import { useEffect, useState } from "react";
+import UseSubscribersAnalytics from "@/shared/utils/useSubscribersAnalytics";
+// import { subscribersAnalytics } from "@/actions/subcribers.analytics";
+// import UseSubscribersAnalytics from "@/shared/utils/useSubscribersanalytics";
+// import useSubscribersanalytics from "@/shared/utils/useSubscribersanalytics";
+// import { useEffect, useState } from "react";
 import {
   LineChart,
   Line,
@@ -18,21 +21,7 @@ interface subscribersAnalyticsData {
 }
 const SubscriberChart = () => {
 
-  const [subscribersData, setSubscribersData] = useState<any>([])
-  const [loading , setLoading] = useState(true)
-
-  useEffect(() => {
-    SubscribersAnalytics();
-  }, []);
-
-
-  const SubscribersAnalytics = async () => {
-      await subscribersAnalytics().then((res:any)=>{
-        setSubscribersData(res);
-        setLoading(false);
-      });
-      
-    };
+  const {subscribersData,loading} = UseSubscribersAnalytics();
 
     const data: subscribersAnalyticsData[] = [];
     subscribersData?.last7Months?.forEach((item: subscribersAnalyticsData) => {
