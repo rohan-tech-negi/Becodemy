@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^7.0.6",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@heroui/button": "^2.2.32",
     "@heroui/react": "^2.8.10",
     "@heroui/system": "^2.4.28",
