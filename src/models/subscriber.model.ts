@@ -10,11 +10,13 @@ const subscriberShema = new Schema(
     newsLetterOwnerId: {
       type: String,
     },
-    source: {
-      type: String,
+    source:{
+      type:String,
+      default:"By Becodemy website",
     },
-    status: {
-      type: String,
+    status:{
+      type:String,
+      default:"Subscribed",
     },
   },
   { timestamps: true }
