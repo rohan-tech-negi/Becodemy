@@ -25,4 +25,25 @@ const ses = new AWS.SES({
 })
 
 
+const adminMail = "support@becodemy.com";
+
+const transporter = nodemailer.createTransport({
+  SES: ses,
+})
+
+export const sendEmail = async({userEmail, subject,content}:Props)=>{
+  try {
+    const response = await transporter.sendMail({
+      from:adminMail,
+      to:userEmail,
+      subject:subject,
+      html:content,
+    })
+    console.log("Email sent successfully",response);
+    return response;
+    
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
 }
