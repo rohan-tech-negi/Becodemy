@@ -1,5 +1,4 @@
 "use server";
-import * as AWS from "aws-sdk";
 import * as nodemailer from "nodemailer";
 
 interface Props {
@@ -8,42 +7,30 @@ interface Props {
   content: string;
 }
 
-AWS.config.update({
-  accessKeyId: process.env.AWS_ACCESS_KEY,
-  secretAccessKey: process.env.AWS_SECRET_KEY,
-  region: "ap-south-1"
-})
-
-AWS.config.getCredentials(function(error){
-  if(error){
-    console.log(error.stack)
-  }
-})
-
-const ses = new AWS.SES({
-  apiVersion:"2010-12-01"
-})
-
-
-const adminMail = "support@becodemy.com";
-
 const transporter = nodemailer.createTransport({
-  SES: ses,
-})
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true, // SSL
+  auth: {
+    user: process.env.SMTP_MAIL,
+    pass: process.env.SMTP_PASSWORD,
+  },
+});
 
-export const sendEmail = async({userEmail, subject,content}:Props)=>{
+const adminMail = process.env.SMTP_MAIL as string;
+
+export const sendEmail = async ({ userEmail, subject, content }: Props) => {
   try {
     const response = await transporter.sendMail({
-      from:adminMail,
-      to:userEmail,
-      subject:subject,
-      html:content,
-    })
-    console.log("Email sent successfully",response);
-    return response;
-    
+      from: adminMail,
+      to: userEmail,
+      subject: subject,
+      html: content,
+    });
+    console.log("Email sent successfully", response);
+    return { message: "Email sent successfully!", data: response };
   } catch (error) {
     console.log(error);
     throw error;
   }
-}
+};

@@ -9,12 +9,13 @@ import { Button } from "@heroui/button"
 import { saveEmail } from "@/actions/save.email"
 import toast from "react-hot-toast"
 import { GetEmailDetails } from "@/actions/get.email-details"
+import { sendEmail } from "@/shared/utils/email.sender"
 const Emaileditor = ({subjectTitle}:{subjectTitle:string}) => {
    const [loading, setLoading] = useState(true);
   const [jsonData, setJsonData] = useState<any | null>(DefaultJsonData);
   const { user } = useClerk();
   const emailEditorRef = useRef<EditorRef>(null);
-  const history = useRouter();
+  const router = useRouter();
 
   const exportHtml = () => {
     const unlayer = emailEditorRef.current?.editor;
@@ -22,6 +23,14 @@ const Emaileditor = ({subjectTitle}:{subjectTitle:string}) => {
     unlayer?.exportHtml(async (data) => {
       const { design, html } = data;
       setJsonData(design);
+      await sendEmail({
+        userEmail: ["rohannegi689@gmail.com"],
+        subject:subjectTitle,
+        content:html,
+      }).then((res:any)=>{
+        toast.success(res.message);
+        router.push("/dashboard/write");
+      })
       
     });
   };
@@ -48,7 +57,7 @@ const Emaileditor = ({subjectTitle}:{subjectTitle:string}) => {
         newsLetterOwnerId: user?.id!,
       }).then((res: any) => {
         toast.success(res.message);
-        history.push("/dashboard/write");
+        router.push("/dashboard/write");
       });
     });
   };
