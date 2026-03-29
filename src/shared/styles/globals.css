@@ -2,59 +2,269 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  /* Brand Colors */
+  --color-primary: #4F46E5;
+  --color-primary-hover: #4338CA;
+  --color-primary-light: #EEF2FF;
+  --color-accent: #10B981;
+  --color-accent-cyan: #06B6D4;
+
+  /* Neutrals */
+  --color-bg: #FFFFFF;
+  --color-bg-subtle: #F8FAFC;
+  --color-bg-section: #F1F5F9;
+  --color-border: #E2E8F0;
+  --color-text-primary: #0F172A;
+  --color-text-secondary: #64748B;
+  --color-text-muted: #94A3B8;
+
+  /* Dark Footer */
+  --color-footer-bg: #0F172A;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  color: black;
-  background: white;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--color-text-primary);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
 }
 
+@keyframes float-reverse {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(12px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(79,70,229,0); }
+  50% { box-shadow: 0 0 20px 8px rgba(79,70,229,0.15); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Legacy keep for anything that might reference spin-slow outside hero */
 @keyframes spin {
-  from {
-    transform: rotate(360deg);
-  }
-  to {
-    transform: rotate(0deg);
-  }
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
 }
-
 .spin-slow {
-  animation: spin 30s linear infinite; /* Adjust the time for the speed of the spin */
-}
-.font-style {
-  background: #fec8eb;
-  padding: 0px 5px;
-}
-.benefit-cover {
-  background-image: url("https://res.cloudinary.com/dkg6jv4l0/image/upload/v1706912822/lmpydkyegtpbhecq1ejw.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
+  animation: spin 30s linear infinite;
 }
 
-.input {
-  width: 100%;
-  background: transparent;
-  padding: 5px;
-  outline: none;
+.float-element {
+  animation: float 6s ease-in-out infinite;
 }
-.jswdLm .blockbuilder-branding{
-  display: none!important;
+
+.float-element-reverse {
+  animation: float-reverse 8s ease-in-out infinite;
+}
+
+/* ============================================
+   DESIGN SYSTEM UTILITIES
+   ============================================ */
+
+/* Font highlight — replaced pink with indigo */
+.font-style {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  padding: 0px 8px;
+  border-radius: 4px;
+}
+
+/* Hero gradient background */
+.hero-gradient {
+  background: linear-gradient(135deg, #F8FAFC 0%, #EEF2FF 40%, #E0E7FF 100%);
+}
+
+/* Grid dot pattern for hero decoration */
+.grid-pattern {
+  background-image: radial-gradient(circle, #CBD5E1 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Card styles */
+.saas-card {
+  background: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  will-change: transform;
+}
+
+.saas-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 48px -12px rgba(79, 70, 229, 0.15);
+}
+
+/* Pricing card highlighted */
+.pricing-card-featured {
+  border: 2px solid var(--color-primary) !important;
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.08);
+}
+
+/* Button styles */
+.btn-primary {
+  background: var(--color-primary);
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 12px 28px;
+  font-weight: 600;
+  font-size: 16px;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  cursor: pointer;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-hover);
+  transform: scale(1.02);
+  box-shadow: 0 8px 24px rgba(79, 70, 229, 0.3);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-text-primary);
+  border: 1.5px solid var(--color-border);
+  border-radius: 10px;
+  padding: 12px 28px;
+  font-weight: 600;
+  font-size: 16px;
+  transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-outline:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: scale(1.02);
+}
+
+.btn-outline:active {
+  transform: scale(0.98);
+}
+
+/* Section spacing */
+.section-pad {
+  padding: 96px 0;
+}
+
+/* Benefit section — no more background image */
+.benefit-cover {
+  background: var(--color-bg-subtle);
+}
+
+/* Input field focus effect */
+.input-saas {
+  width: 100%;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: #fff;
+  outline: none;
+  transition: border-color 0.2s;
+  font-size: 15px;
+}
+
+.input-saas:focus {
+  border-color: var(--color-primary);
+}
+
+.input-saas::placeholder {
+  color: rgba(255,255,255,0.4);
+}
+
+/* Hide email editor branding */
+.jswdLm .blockbuilder-branding {
+  display: none !important;
+}
+
+/* GSAP initial states (set via JS, but fallback) */
+.gsap-hidden {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #4F46E5, #06B6D4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Checkmark icon in pricing */
+.check-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Pill toggle */
+.billing-toggle {
+  display: inline-flex;
+  background: var(--color-bg-section);
+  border-radius: 50px;
+  padding: 4px;
+  border: 1px solid var(--color-border);
+}
+
+.billing-toggle-btn {
+  padding: 8px 24px;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s, box-shadow 0.25s;
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+}
+
+.billing-toggle-btn.active {
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(79, 70, 229, 0.3);
 }
